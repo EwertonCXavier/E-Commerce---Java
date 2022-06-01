@@ -1,0 +1,38 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: product
+
+  datasource:
+    url: jdbc:postgresql://localhost:49156/product
+    username: ewerton
+    password: root
+
+
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update # DO NOT PUT THIS (CREATE-DROP) IN PRODUCTION
+    show-sql: true
+
+
+# Eureka-Client Setup
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
+
+#eureka.instance.hostname=localhost
+
+
+#eureka:
+#  instance:
+#    hostname: localhost

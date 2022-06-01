@@ -1,0 +1,41 @@
+services:
+  postgres:
+    container_name: postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: ewerton
+      POSTGRES_PASSWORD: root
+      PGDATA: /data/postgres-ecommerce
+    volumes:
+      - postgres-ecommerce:/data/postgres-ecommerce
+    ports:
+      - "49156:5432"
+    networks:
+      - postgres
+    restart: unless-stopped
+
+
+  pgadmin-ecommerce:
+    container_name: pgadmin-ecommerce
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin-ecommerce:/var/lib/pgadmin-ecommerce
+
+    ports:
+      - "5051:80"
+    networks:
+      - postgres
+
+    restart: unless-stopped
+
+networks:
+  postgres:
+    driver: bridge
+
+volumes:
+  postgres-ecommerce:
+  pgadmin-ecommerce:
