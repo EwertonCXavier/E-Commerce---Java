@@ -27,16 +27,17 @@ public class UserController {
 
   @GetMapping
   public ResponseEntity<List<User>> getAllUsers() {
-
-
     return ResponseEntity.ok().body(userServiceImp.getAllUsers());
   }
 
 
-  @GetMapping("/product/{productId}")
-  public ResponseEntity<ProductDTO> getProductById(@PathVariable Long productId) {
-    return ResponseEntity.ok().body(userProductClient.getProductById(productId));
+  @GetMapping("/{userId}")
+  public ResponseEntity<User> getUserById(@PathVariable String userId) {
+    return ResponseEntity.ok().body(userServiceImp.getUserById(userId));
   }
+
+
+
 
 
 

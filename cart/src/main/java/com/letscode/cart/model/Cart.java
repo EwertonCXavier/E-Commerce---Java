@@ -1,5 +1,6 @@
 package com.letscode.cart.model;
 
+import com.letscode.cart.dto.CartItemDTO;
 import com.letscode.cart.dto.ProductDTO;
 import com.letscode.cart.dto.UserDTO;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -24,12 +26,11 @@ public class Cart {
   private Date createdAt;
 
   // Interface usada somente para definir qual a estrutura adotada pelo microsserviço de produto
-  @Embedded
-  private ProductDTO product;
-  // Interface usada somente para definir qual a estrutura adotada pelo microsserviço de usuário
-  @Embedded
-  private UserDTO user;
+  @ElementCollection
+  private List<CartItemDTO> cartItemsList;
 
-  private Long quantity;
+  // Interface usada somente para definir qual a estrutura adotada pelo microsserviço de usuário
+  // Optou-se pelo tipo para evitar complexidade
+  private String userId;
 
 }

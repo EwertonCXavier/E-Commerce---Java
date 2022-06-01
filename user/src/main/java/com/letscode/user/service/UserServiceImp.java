@@ -25,7 +25,13 @@ public class UserServiceImp implements UserService {
 
   @Override
   public User getUserById(String userId) {
-    return null;
+    Optional<User> optionalUser = userRepository.findById(userId);
+
+    if(optionalUser.isPresent()) {
+      return optionalUser.get();
+    }
+
+    throw new IllegalStateException("User not found!");
   }
 
   @Override

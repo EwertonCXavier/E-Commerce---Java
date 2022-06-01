@@ -1,6 +1,7 @@
 package com.letscode.user.model;
 
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -12,8 +13,9 @@ import javax.persistence.*;
 @Table(name = "user_table")
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long userId;
+  @GeneratedValue(generator = "uuid")
+  @GenericGenerator(name = "uuid", strategy = "uuid2")
+  private String userId;
   private String email;
   private String senha;
 }

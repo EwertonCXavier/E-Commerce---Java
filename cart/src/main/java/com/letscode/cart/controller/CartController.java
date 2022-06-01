@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/cart")
+@RequestMapping("/cart")
 public class CartController {
   private final CartServiceImp cartServiceImp;
 
@@ -22,6 +22,7 @@ public class CartController {
 
   @PostMapping
   public ResponseEntity<Cart> addProductToCart(@RequestBody Cart cart) {
+    System.out.println("Cart: " + cart.getUserId());
     return ResponseEntity.ok().body(cartServiceImp.addProductToCart(cart));
   }
 
