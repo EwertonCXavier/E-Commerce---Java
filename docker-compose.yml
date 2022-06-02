@@ -32,6 +32,21 @@ services:
 
     restart: unless-stopped
 
+
+  users:
+    image: users
+    ports:
+      - "8089:8080"
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo
+    volumes:
+      - mongodata:/data/db
+    ports:
+      - "27017:27017"
+
 networks:
   postgres:
     driver: bridge
@@ -39,3 +54,4 @@ networks:
 volumes:
   postgres-ecommerce:
   pgadmin-ecommerce:
+  mongodata:

@@ -3,7 +3,7 @@ package com.letscode.cart.service;
 import com.letscode.cart.client.CartClient;
 import com.letscode.cart.client.UserClient;
 import com.letscode.cart.dto.ProductDTO;
-import com.letscode.cart.dto.UserDTO;
+import com.letscode.cart.dto.UserItemDTO;
 import com.letscode.cart.model.Cart;
 import com.letscode.cart.repository.CartRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +28,7 @@ public class CartServiceImp implements CartService{
   @Override
   public Cart addProductToCart(Cart cart) {
     // Checks if the user is valid (exists)
-    Optional<UserDTO> optionalUser = Optional.ofNullable(userClient.getUserById(cart.getUserId()));
+    Optional<UserItemDTO> optionalUser = Optional.ofNullable(userClient.getUserById());
 
 
 
@@ -36,9 +36,7 @@ public class CartServiceImp implements CartService{
       throw new IllegalStateException("User is invalid!");
     }
 
-    System.out.println("optionalUser: " + optionalUser.get().getEmail());
     // Checks if the product is valid (exists)
-    Optional<ProductDTO> optionalProduct1 = Optional.ofNullable(cartClient.getProductById(cart.getCartItemsList().get(0).getProductId()));
 
     cart.getCartItemsList().forEach(cartItemDTO -> {
       Optional<ProductDTO> optionalProduct = Optional.ofNullable(cartClient.getProductById(cartItemDTO.getProductId()));
